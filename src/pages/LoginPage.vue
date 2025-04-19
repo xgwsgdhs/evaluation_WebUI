@@ -26,6 +26,7 @@ const handleLogin = async () => {
     if (res.status_code === 200) {
       //存储token
       localStorage.setItem('access_token', res.access_token);
+      errorMsg.value = res.message || '登录成功'
       // 成功：跳转主页
       await router.push('/')
     } else {
