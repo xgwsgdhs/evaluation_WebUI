@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import { verifyToken } from '../api/token';  // 导入验证方法
 import Home from '../pages/HomePage.vue'
 import Login from '../pages/LoginPage.vue'
+import EvaluationManagement from "@/pages/EvaluationManagement.vue";
+import EvaluationDetail from "@/pages/EvaluationDetail.vue";
 
 const routes = [
     {
@@ -15,6 +17,12 @@ const routes = [
         name: 'Login',
         component: Login,
         meta: { requiresUnauth: true }  // 添加 meta 标记，表示不允许已登录用户访问
+    },
+    {
+        path: '/evaluation-management',
+        name: 'EvaluationManagement',
+        component: EvaluationManagement,
+        meta: { requiresAuth: true }  // 添加 meta 标记，表示不允许已登录用户访问
     },
 ];
 
