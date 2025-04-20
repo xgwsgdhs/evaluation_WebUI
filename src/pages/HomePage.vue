@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <h1>欢迎回来, {{ user.username }}</h1>  <!-- 显示当前用户的姓名 -->
-    <p>这是主页内容，您可以在这里展示欢迎信息、用户资料等。</p>
 
     <div>
       <button @click="logout">登出</button>
@@ -26,8 +25,9 @@ export default {
     onMounted(async () => {
       if (token) {
         const userData = await verifyToken(token);  // 验证 token 是否有效
-        if (userData) {
+        if (userData.valid) {
           user.value = userData;  // 将用户数据存储在响应式变量中
+          console.log(user)
         } else {
           // 如果 token 无效，跳转到登录页面
           router.push('/login');

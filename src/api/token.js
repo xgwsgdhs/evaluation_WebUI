@@ -9,7 +9,7 @@ export const verifyToken = async (token) => {
                 'Authorization': `Bearer ${token}`,  // 使用 Bearer token 作为 Authorization 头
             }
         });
-        return response.data.valid; // 返回 token 是否有效(True)
+        return response.data; // 返回 token 是否有效(True)
     } catch (error) {
         console.error('Token verification failed:', error);
         return false; // 如果验证失败，返回 false
