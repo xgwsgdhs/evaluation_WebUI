@@ -40,6 +40,7 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router'; // 引入 useRouter 用于路由跳转
 import * as echarts from 'echarts';
+import {BASE_URL} from "@/config.js";
 
 export default {
   name: 'EvaluationDetail',
@@ -58,7 +59,7 @@ export default {
       const name = evaluation.value.name;
 
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/evaluation?name=${name}`, {
+        const response = await axios.get(`${BASE_URL}/evaluation?name=${name}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -119,7 +120,7 @@ export default {
       };
 
       try {
-        const response = await axios.put(`http://127.0.0.1:8000/evaluation?name=${evaluation.value.name}`, updatedScores, {
+        const response = await axios.put(`${BASE_URL}/evaluation?name=${evaluation.value.name}`, updatedScores, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',

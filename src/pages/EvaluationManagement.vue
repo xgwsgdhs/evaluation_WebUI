@@ -59,6 +59,7 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import {BASE_URL} from "@/config.js";
 
 export default {
   name: 'EvaluationManagement',
@@ -76,7 +77,7 @@ export default {
       const token = localStorage.getItem('access_token');
       if (token) {
         try {
-          const response = await axios.get('http://127.0.0.1:8000/evaluations', {
+          const response = await axios.get(`${BASE_URL}/evaluations`, {
             headers: { 'Authorization': `Bearer ${token}` },
           });
           if (response.data.status_code === 200) {
@@ -140,7 +141,7 @@ export default {
         }
       };
       try {
-        const response = await axios.post('http://127.0.0.1:8000/upload_excel', formData, config);
+        const response = await axios.post(`${BASE_URL}/upload_excel`, formData, config);
         console.log('上传成功:', response.data);
         alert('上传成功');
         showUploadModal.value = false;  // 关闭弹窗
@@ -183,7 +184,7 @@ export default {
 
       try {
         // 发送 DELETE 请求
-        const response = await axios.delete(`http://127.0.0.1:8000/evaluation?name=${encodedName}`, {
+        const response = await axios.delete(`${BASE_URL}/evaluation?name=${encodedName}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

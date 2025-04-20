@@ -12,7 +12,7 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import { verifyToken } from '../api/token';  // 导入验证方法
+import { verifyToken } from '../api/token';  // 导入验证api
 import { useRouter } from 'vue-router';
 
 export default {
