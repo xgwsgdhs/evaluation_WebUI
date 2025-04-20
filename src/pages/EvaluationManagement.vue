@@ -5,6 +5,7 @@
     <div>
       <button @click="goToAddEvaluationPage">添加评估</button>
       <button @click="openFilePicker">上传评估</button>
+      <button @click="goToHome" style="background-color: #007BFF">返回首页</button>
     </div>
 
     <div v-if="evaluations.length > 0" class="table-container">
@@ -201,6 +202,10 @@ export default {
       }
     };
 
+    const goToHome = () => {
+      router.push('/');  // 跳转到评估管理页面
+    };
+
     return {
       selectedEvaluationName,
       selectedEvaluationIndex,
@@ -217,6 +222,7 @@ export default {
       confirmDelete,
       cancelDelete,
       deleteEvaluation,
+      goToHome
     };
   },
 };
@@ -233,7 +239,7 @@ export default {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 20px;
+  padding: 20px 80px 40px 80px;
 }
 
 /* 表格样式 */
@@ -363,15 +369,5 @@ button {
 
 button:hover {
   opacity: 0.8;
-}
-
-button.cancel {
-  background-color: #f44336;
-  color: white;
-}
-
-button.confirm {
-  background-color: #4CAF50;
-  color: white;
 }
 </style>

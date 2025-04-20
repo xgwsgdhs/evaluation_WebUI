@@ -10,7 +10,7 @@ const routes = [
         path: '/',
         name: 'Home',
         component: Home,
-        meta: { requiresAuth: true },  // 添加需要认证的标记
+        meta: { requiresAuth: true }  // 添加需要认证的标记
     },
     {
         path: '/login',
@@ -22,7 +22,14 @@ const routes = [
         path: '/evaluation-management',
         name: 'EvaluationManagement',
         component: EvaluationManagement,
-        meta: { requiresAuth: true }  // 添加 meta 标记，表示不允许已登录用户访问
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/evaluation-detail/:name', // 动态路由参数 `name`
+        name: 'EvaluationDetail',
+        component: EvaluationDetail, // 评估详情页面
+        props: true, // 使路由参数作为 props 传递给组件
+        meta: { requiresAuth: true }
     },
 ];
 
