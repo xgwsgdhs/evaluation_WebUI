@@ -6,6 +6,7 @@
       <button @click="goToAddEvaluationPage">添加评估</button>
       <button @click="openFilePicker">上传评估</button>
       <button @click="goToHome" style="background-color: #007BFF">返回首页</button>
+      <button @click="downloadEvaluationFile">下载评估</button>
     </div>
 
     <div v-if="evaluations.length > 0" class="table-container">
@@ -151,6 +152,35 @@ export default {
       }
     };
 
+    // 下载评估文件
+    const downloadEvaluationFile = async () => {
+      const token = localStorage.getItem('access_token'); // 获取token
+
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/download_excel', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+          responseType: 'blob',  // 重要！确保返回的文件是 blob 类型
+        });
+
+        // 创建一个链接并触发下载
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', '评估文件.xlsx'); // 设置下载文件的名称
+        document.body.appendChild(link);
+        link.click();
+
+        // 清理链接
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error('下载失败:', error);
+        alert('下载失败，请稍后再试');
+      }
+    };
+
+
     // 跳转到评估对象详情页
     const goToDetailPage = (evaluation) => {
       router.push(`/evaluation-detail/${evaluation.name}`);
@@ -223,7 +253,8 @@ export default {
       confirmDelete,
       cancelDelete,
       deleteEvaluation,
-      goToHome
+      goToHome,
+      downloadEvaluationFile,
     };
   },
 };
