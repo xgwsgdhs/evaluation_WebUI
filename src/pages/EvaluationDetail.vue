@@ -131,6 +131,7 @@ export default {
 
         if (response.status === 200) {
           alert('修改成功');
+          initRadarChart()
         } else {
           alert('修改失败');
         }
