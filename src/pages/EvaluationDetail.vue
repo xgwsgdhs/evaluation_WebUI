@@ -59,7 +59,8 @@ export default {
       const name = evaluation.value.name;
 
       try {
-        const response = await axios.get(`${BASE_URL}/evaluation?name=${name}`, {
+        const encodedName = encodeURIComponent(name);
+        const response = await axios.get(`${BASE_URL}/evaluation?name=${encodedName}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

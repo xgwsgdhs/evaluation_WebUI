@@ -34,8 +34,15 @@ const handleLogin = async () => {
       errorMsg.value = res.message || '登录失败'
     }
   } catch (err) {
-    errorMsg.value = '服务器异常或网络错误'
-    console.error(err)
+    // 根据错误类型进行分类显示
+    if (err.response && err.response.data) {
+      // 后端返回错误信息
+      errorMsg.value = err.response.data.detail || '服务器异常';
+    } else {
+      // 网络异常或其他错误
+      errorMsg.value = '网络或服务器异常，请稍后再试';
+    }
+    console.error(err);
   }
 }
 </script>
