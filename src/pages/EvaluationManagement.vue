@@ -157,7 +157,7 @@ export default {
       const token = localStorage.getItem('access_token'); // 获取token
 
       try {
-        const response = await axios.get('http://127.0.0.1:8000/download_excel', {
+        const response = await axios.get(`${BASE_URL}/download_excel`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
