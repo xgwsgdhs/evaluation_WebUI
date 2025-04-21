@@ -121,7 +121,8 @@ export default {
       };
 
       try {
-        const response = await axios.put(`${BASE_URL}/evaluation?name=${evaluation.value.name}`, updatedScores, {
+        const encodedName = encodeURIComponent(evaluation.value.name);
+        const response = await axios.put(`${BASE_URL}/evaluation?name=${encodedName}`, updatedScores, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
